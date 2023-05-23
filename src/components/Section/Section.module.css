@@ -1,0 +1,40 @@
+.Section {
+  position: relative;
+  background-color: #ffedd5;
+  padding: var(--lh);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--lh) / 2);
+  box-shadow: inset 0 0 0 1px #fed7aa;
+}
+
+.SectionTitle {
+  font-size: var(--fz);
+  font-weight: 800;
+}
+
+.SectionToggleButton {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  inset-block-start: var(--lh);
+  inset-inline-end: var(--lh);
+  width: var(--lh);
+  height: var(--lh);
+  cursor: pointer;
+}
+
+.SectionToggleIcon {
+  stroke: var(--color-link);
+}
+
+.SectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--lh) / 2);
+}
+
+.SectionContentClosed {
+  display: none;
+}

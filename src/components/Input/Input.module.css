@@ -1,0 +1,49 @@
+.InputContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.InputLabel {
+  font-size: calc(var(--fz) * 0.875);
+  font-weight: 700;
+}
+
+.Input {
+  font: inherit;
+  padding: calc(var(--lh) / 6) calc(var(--lh) / 3);
+  border: none;
+  outline: 1px solid #fed7aa;
+  border-radius: var(--radius);
+  outline-offset: 0px;
+}
+
+.Input:focus {
+  outline: 1px solid #ea580c;
+}
+
+.InputToggleButton {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  inset-block-start: calc(var(--lh) + (var(--lh) / 6));
+  inset-inline-end: calc(var(--lh) / 6);
+  width: var(--lh);
+  height: var(--lh);
+  cursor: pointer;
+  padding: 2px;
+}
+
+.InputToggleIcon {
+  stroke: #a3a3a3;
+}
+
+.InputManual {
+  margin-block-start: calc(var(--lh) / 4);
+  font-size: calc(var(--fz) * 0.875);
+  color: #7c2d12;
+}
+
+.InputManualClosed {
+  display: none;
+}

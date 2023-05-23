@@ -1,0 +1,44 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lh);
+  padding: var(--lh);
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+.AppHeader {
+}
+
+.AppLogo {
+  font-weight: 900;
+  color: inherit;
+  font-size: calc(var(--fz) * 1.25);
+  text-decoration: none;
+}
+
+.AppMain {
+  display: grid;
+  grid-template-rows: 1fr, auto;
+  gap: calc(var(--lh) / 2);
+}
+
+@media (min-width: 768px) {
+  .AppMain {
+    grid-template-rows: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.AppEditor {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--lh) / 2);
+}
+
+.AppResult {
+}
+
+.AppFooter {
+}

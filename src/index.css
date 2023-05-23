@@ -1,0 +1,36 @@
+:root {
+  --fz: 1rem;
+  --lh: 1.5rem;
+
+  --color-background: #fff7ed;
+  --color-foreground: #431407;
+  --color-link: #f97316;
+
+  --radius: 4px;
+}
+
+@font-face {
+  font-family: "Inter var experimental";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: oblique 0deg 10deg;
+  src: url("./assets/Inter.var.woff2") format("woff2");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: "Inter var experimental";
+  font-size: var(--fz);
+  line-height: var(--lh);
+}
+
+a {
+  color: var(--color-link);
+}
