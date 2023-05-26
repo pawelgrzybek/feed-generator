@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: calc(var(--lh) / 2);
-  box-shadow: inset 0 0 0 1px #fed7aa;
+  box-shadow: 0 0 0 1px #fed7aa;
 }
 
 .SectionTitle {

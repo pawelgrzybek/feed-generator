@@ -38,12 +38,30 @@
   stroke: #a3a3a3;
 }
 
+.InputToggleIcon:hover {
+  stroke: var(--color-link);
+}
+
 .InputManual {
-  margin-block-start: calc(var(--lh) / 4);
+  margin-block-start: calc(var(--lh) / 2);
   font-size: calc(var(--fz) * 0.875);
   color: #7c2d12;
 }
 
 .InputManualClosed {
   display: none;
+}
+
+.InputManualList {
+  list-style: none;
+  margin-block-end: calc(var(--lh) / 2);
+}
+
+.InputManualCode {
+  background-color: #fae4c7;
+  border-radius: var(--radius);
+  padding: 2px 5px;
+}
+
+.InputManualListItem {
 }

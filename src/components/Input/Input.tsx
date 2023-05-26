@@ -6,6 +6,10 @@ interface Props {
   label: string;
   value: string;
   onInputHandler: JSX.EventHandler<HTMLInputElement, InputEvent>;
+  fieldRss: string;
+  fieldAtom: string;
+  fieldJson: string;
+  fieldDescription: string;
 }
 
 const Input: Component<Props> = (props) => {
@@ -65,10 +69,22 @@ const Input: Component<Props> = (props) => {
           [styles.InputManualClosed]: isClosed(),
         }}
       >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-        quia deserunt delectus error, asperiores magnam omnis cupiditate
-        necessitatibus velit porro, eaque enim corporis. Consectetur ipsam
-        officiis enim odio ratione assumenda!
+        <ul class={styles.InputManualList}>
+          <li class={styles.InputManualListItem}>
+            In RSS compiles to{" "}
+            <code class={styles.InputManualCode}>{props.fieldRss}</code> element
+          </li>
+          <li class={styles.InputManualListItem}>
+            In Atom compiles to{" "}
+            <code class={styles.InputManualCode}>{props.fieldAtom}</code>{" "}
+            element
+          </li>
+          <li class={styles.InputManualListItem}>
+            In JSON Feeds compiles to{" "}
+            <code class={styles.InputManualCode}>{props.fieldJson}</code> field
+          </li>
+        </ul>
+        <p>{props.fieldDescription}</p>
       </div>
     </div>
   );

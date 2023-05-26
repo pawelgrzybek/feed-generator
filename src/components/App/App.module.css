@@ -12,7 +12,8 @@
 }
 
 .AppLogo {
-  font-weight: 900;
+  font-family: "Fira Code VF";
+  font-weight: 700;
   color: inherit;
   font-size: calc(var(--fz) * 1.25);
   text-decoration: none;
@@ -38,6 +39,41 @@
 }
 
 .AppResult {
+  background-color: #fafaf9;
+  box-shadow: 0 0 0 1px #e7e5e4;
+  border-radius: var(--radius);
+}
+
+.AppTabs {
+  display: flex;
+  background-color: #e7e5e4;
+  gap: 1px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+}
+
+.AppTab {
+  flex-grow: 1;
+  padding: var(--lh);
+  border: none;
+  background-color: #fafaf9;
+  overflow: hidden;
+  box-shadow: inset 0 -1px 0 0 #e7e5e4;
+  cursor: pointer;
+  font: inherit;
+  font-family: "Fira Code VF";
+  font-weight: 450;
+  color: var(--color-foreground-light);
+  font-size: calc(var(--fz) * 0.9375);
+}
+
+.AppTab:hover {
+  color: var(--color-foreground);
+}
+
+.AppTabActive {
+  box-shadow: none;
+  color: var(--color-foreground);
 }
 
 .AppFooter {
