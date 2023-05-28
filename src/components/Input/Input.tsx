@@ -1,4 +1,3 @@
-import type { JSX } from "solid-js";
 import { Component, createSignal } from "solid-js";
 import styles from "./Input.module.css";
 
@@ -72,19 +71,27 @@ const Input: Component<Props> = (props) => {
         }}
       >
         <ul class={styles.InputManualList}>
-          <li class={styles.InputManualListItem}>
-            In RSS compiles to{" "}
-            <code class={styles.InputManualCode}>{props.fieldRss}</code> element
-          </li>
-          <li class={styles.InputManualListItem}>
-            In Atom compiles to{" "}
-            <code class={styles.InputManualCode}>{props.fieldAtom}</code>{" "}
-            element
-          </li>
-          <li class={styles.InputManualListItem}>
-            In JSON Feeds compiles to{" "}
-            <code class={styles.InputManualCode}>{props.fieldJson}</code> field
-          </li>
+          {props.fieldRss && (
+            <li class={styles.InputManualListItem}>
+              In RSS compiles to{" "}
+              <code class={styles.InputManualCode}>{props.fieldRss}</code>{" "}
+              element
+            </li>
+          )}
+          {props.fieldAtom && (
+            <li class={styles.InputManualListItem}>
+              In Atom compiles to{" "}
+              <code class={styles.InputManualCode}>{props.fieldAtom}</code>{" "}
+              element
+            </li>
+          )}
+          {props.fieldJson && (
+            <li class={styles.InputManualListItem}>
+              In JSON Feeds compiles to{" "}
+              <code class={styles.InputManualCode}>{props.fieldJson}</code>{" "}
+              field
+            </li>
+          )}
         </ul>
         <p>{props.fieldDescription}</p>
       </div>

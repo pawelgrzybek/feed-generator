@@ -3,6 +3,7 @@ interface Data {
   homepageUrl: string;
   description: string;
   author: string;
+  lastUpdate: string;
 }
 
 const formatAtom = ({
@@ -10,11 +11,12 @@ const formatAtom = ({
   homepageUrl,
   description,
   author,
+  lastUpdate,
 }: Data) => `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>${homepageUrl}</id>
     <title>${title}</title>
-    <updated>2023-05-22T13:00:00.000Z</updated>
+    <updated>${new Date(lastUpdate).toISOString()}</updated>
     <author>
         <name>${author}</name>
     </author>
@@ -24,7 +26,7 @@ const formatAtom = ({
         <id>${homepageUrl}/posts-one</id>
         <title>Post one</title>
         <link href="${homepageUrl}/posts-one"/>
-        <updated>2023-05-22T13:00:00.000Z</updated>
+        <updated>${new Date(lastUpdate).toISOString()}</updated>
         <summary type="html">${homepageUrl}/posts-one</summary>
         <content type="html">Post one content.</content>
     </entry>

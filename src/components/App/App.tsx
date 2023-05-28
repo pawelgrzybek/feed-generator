@@ -31,6 +31,9 @@ const App: Component = () => {
     "Example website description."
   );
   const [author, setAuthor] = createSignal("John Doe");
+  const [lastUpdate, setLastUpdate] = createSignal(
+    new Date().toISOString().split("T")[0]
+  );
 
   const InputTitle = () => (
     <Input
@@ -82,7 +85,19 @@ const App: Component = () => {
       value={author()}
       onInputHandler={setAuthor}
       fieldAtom="author"
-      fieldDescription="Phrase or sentence describing the channel."
+      fieldDescription="Name of the author."
+    />
+  );
+
+  const InputLastUpdate = () => (
+    <Input
+      label="Last time updated"
+      id="author"
+      type="date"
+      value={lastUpdate()}
+      onInputHandler={setLastUpdate}
+      fieldAtom="updated"
+      fieldDescription="The last time the feed was modified."
     />
   );
 
@@ -102,7 +117,7 @@ const App: Component = () => {
       optional: [<WIP />],
     },
     atom: {
-      required: [<InputTitle />, <InputHomepageUrl />],
+      required: [<InputTitle />, <InputHomepageUrl />, <InputLastUpdate />],
       recommended: [<InputAuthor />],
       optional: [<InputDescription />],
     },
@@ -168,6 +183,7 @@ const App: Component = () => {
                   homepageUrl: homepageUrl(),
                   description: description(),
                   author: author(),
+                  lastUpdate: lastUpdate(),
                 })}
               </pre>
             </code>
