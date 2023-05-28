@@ -4,12 +4,10 @@ import styles from "./Section.module.css";
 interface Props {
   children: JSX.Element;
   title: string;
-  closed?: boolean;
+  closed: boolean;
 }
 
 const Section: Component<Props> = (props) => {
-  props = mergeProps({ closed: true }, props);
-
   const [isClosed, setIsClosed] = createSignal(props.closed);
 
   return (

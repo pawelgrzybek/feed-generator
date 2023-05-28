@@ -46,6 +46,6 @@ a {
 
 code {
   font-family: "Fira Code VF";
-  font-weight: 450;
+  font-weight: 480;
   font-size: calc(var(--fz) * 0.9375);
 }

@@ -22,6 +22,18 @@
   outline: 1px solid #ea580c;
 }
 
+@keyframes Pop {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
 .InputToggleButton {
   background-color: transparent;
   border: none;
@@ -34,11 +46,15 @@
   padding: 2px;
 }
 
+.InputToggleButton:hover {
+  animation: Pop 0.15s ease-in-out;
+}
+
 .InputToggleIcon {
   stroke: #a3a3a3;
 }
 
-.InputToggleIcon:hover {
+.InputToggleButton:hover .InputToggleIcon {
   stroke: var(--color-link);
 }
 

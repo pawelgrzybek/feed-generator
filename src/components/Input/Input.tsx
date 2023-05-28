@@ -4,11 +4,13 @@ import styles from "./Input.module.css";
 
 interface Props {
   label: string;
+  id: string;
+  type: string;
   value: string;
-  onInputHandler: JSX.EventHandler<HTMLInputElement, InputEvent>;
-  fieldRss: string;
-  fieldAtom: string;
-  fieldJson: string;
+  onInputHandler: any; // todo: type this
+  fieldRss?: string;
+  fieldAtom?: string;
+  fieldJson?: string;
   fieldDescription: string;
 }
 
@@ -17,13 +19,13 @@ const Input: Component<Props> = (props) => {
 
   return (
     <div class={styles.InputContainer}>
-      <label class={styles.InputLabel} html-for="name">
+      <label class={styles.InputLabel} for={props.id}>
         {props.label}
       </label>
       <input
         class={styles.Input}
-        id="name"
-        type="text"
+        id={props.id}
+        type={props.type}
         value={props.value}
         onInput={(e) => props.onInputHandler(e.currentTarget.value)}
       />

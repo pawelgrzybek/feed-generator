@@ -25,6 +25,22 @@
   cursor: pointer;
 }
 
+@keyframes Pop {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.SectionToggleButton:hover {
+  animation: Pop 0.15s ease-in-out;
+}
+
 .SectionToggleIcon {
   stroke: var(--color-link);
 }

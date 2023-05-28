@@ -21,6 +21,7 @@
 
 .AppMain {
   display: grid;
+  grid-template-columns: 100%;
   grid-template-rows: 1fr, auto;
   gap: calc(var(--lh) / 2);
 }
@@ -28,7 +29,7 @@
 @media (min-width: 768px) {
   .AppMain {
     grid-template-rows: none;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 50%);
   }
 }
 
@@ -54,7 +55,7 @@
 
 .AppTab {
   flex-grow: 1;
-  padding: var(--lh);
+  padding: calc(var(--lh) * 0.75) var(--lh);
   border: none;
   background-color: #fafaf9;
   overflow: hidden;
@@ -67,8 +68,9 @@
   font-size: calc(var(--fz) * 0.9375);
 }
 
-.AppTab:hover {
+.AppTab:not(.AppTabActive):hover {
   color: var(--color-foreground);
+  background-color: #fff;
 }
 
 .AppTabActive {
@@ -76,5 +78,17 @@
   color: var(--color-foreground);
 }
 
+.AppOutput {
+  display: block;
+  padding: var(--lh);
+  overflow: hidden;
+}
+
+.AppOutputCode {
+  display: block;
+  overflow: auto;
+}
+
 .AppFooter {
+  font-size: calc(var(--fz) * 0.875);
 }

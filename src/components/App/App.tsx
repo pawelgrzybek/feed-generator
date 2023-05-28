@@ -1,14 +1,117 @@
-import { Component } from "solid-js";
+import { Component, For } from "solid-js";
 import { createSignal } from "solid-js";
 import styles from "./App.module.css";
 import Section from "../Section/Section";
 import Input from "../Input/Input";
+import formatRss from "../../utils/formatRss";
+import formatAtom from "../../utils/formatAtom";
+import formatJson from "../../utils/formatJson";
+
+type Format = "rss" | "atom" | "json";
+
+const SECTIONS = [
+  { title: "Channel (required fields)", closed: false, key: "required" },
+  { title: "Channel (recommended fields)", closed: false, key: "recommended" },
+  { title: "Channel (optional fields)", closed: false, key: "optional" },
+  // { title: "Items", closed: false, key: "items" },
+];
+
+const formatMapper: Record<Format, Function> = {
+  rss: formatRss,
+  atom: formatAtom,
+  json: formatJson,
+};
 
 const App: Component = () => {
-  const [title, setTitle] = createSignal("");
-  const [description, setDescription] = createSignal("");
-  const [homepageUrl, setHomepageUrl] = createSignal("");
-  const [feedUrl, setFeedUrl] = createSignal("");
+  const [format, setFormat] = createSignal<Format>("rss");
+
+  const [title, setTitle] = createSignal("Example website title");
+  const [homepageUrl, setHomepageUrl] = createSignal("https://example.com");
+  const [description, setDescription] = createSignal(
+    "Example website description."
+  );
+  const [author, setAuthor] = createSignal("John Doe");
+
+  const InputTitle = () => (
+    <Input
+      label="Title"
+      id="title"
+      type="text"
+      value={title()}
+      onInputHandler={setTitle}
+      fieldRss="title"
+      fieldAtom="title"
+      fieldJson="title"
+      fieldDescription="Contains a human readable title for the feed. Often the same as the title of the associated website."
+    />
+  );
+
+  const InputHomepageUrl = () => (
+    <Input
+      label="Homepage URL"
+      id="homepageUrl"
+      type="text"
+      value={homepageUrl()}
+      onInputHandler={setHomepageUrl}
+      fieldRss="link"
+      fieldAtom="id"
+      fieldJson="home_page_url"
+      fieldDescription="The URL to the HTML website corresponding to the channel."
+    />
+  );
+
+  const InputDescription = () => (
+    <Input
+      label="Description"
+      id="description"
+      type="text"
+      value={description()}
+      onInputHandler={setDescription}
+      fieldRss="description"
+      fieldAtom="subtitle"
+      fieldJson="description"
+      fieldDescription="Phrase or sentence describing the channel."
+    />
+  );
+
+  const InputAuthor = () => (
+    <Input
+      label="Author"
+      id="author"
+      type="text"
+      value={author()}
+      onInputHandler={setAuthor}
+      fieldAtom="author"
+      fieldDescription="Phrase or sentence describing the channel."
+    />
+  );
+
+  const WIP = () => (
+    <p>
+      Work in progress.{" "}
+      <a href="https://github.com/pawelgrzybek/feed-generator">
+        Your contributions are welcome 😜
+      </a>
+    </p>
+  );
+
+  const inputs: Record<Format, any> = {
+    rss: {
+      required: [<InputTitle />, <InputHomepageUrl />, <InputDescription />],
+      recommended: [<WIP />],
+      optional: [<WIP />],
+    },
+    atom: {
+      required: [<InputTitle />, <InputHomepageUrl />],
+      recommended: [<InputAuthor />],
+      optional: [<InputDescription />],
+    },
+    json: {
+      required: [<InputTitle />],
+      recommended: [<InputHomepageUrl />],
+      optional: [<InputDescription />],
+    },
+  };
 
   return (
     <div class={styles.App}>
@@ -19,79 +122,53 @@ const App: Component = () => {
       </header>
       <main class={styles.AppMain}>
         <div class={styles.AppEditor}>
-          <Section title="Channel (required fields)" closed={false}>
-            <Input
-              label="Title"
-              value={title()}
-              onInputHandler={setTitle}
-              fieldRss="title"
-              fieldAtom="title"
-              fieldJson="title"
-              fieldDescription="Contains a human readable title for the feed. Often the same as the title of the associated website."
-            />
-            <Input
-              label="Description"
-              value={description()}
-              onInputHandler={setDescription}
-              fieldRss="description"
-              fieldAtom="subtitle"
-              fieldJson="description"
-              fieldDescription="Phrase or sentence describing the channel."
-            />
-            <Input
-              label="Homepage URL"
-              value={homepageUrl()}
-              onInputHandler={setHomepageUrl}
-              fieldRss="link"
-              fieldAtom="link"
-              fieldJson="home_page_url"
-              fieldDescription="The URL to the HTML website corresponding to the channel."
-            />
-          </Section>
-          <Section title="Channel (recommended fields)" closed={false}>
-            <Input
-              label="Feed URL"
-              value={feedUrl()}
-              onInputHandler={setFeedUrl}
-              fieldRss="atom:link"
-              fieldAtom="link"
-              fieldJson="feed_url"
-              fieldDescription="This is field description."
-            />
-          </Section>
-          <Section title="Channel (optional fields)">
-            <p>test</p>
-          </Section>
-          <Section title="Items">
-            <p>test</p>
-          </Section>
+          <For each={SECTIONS}>
+            {(section, i) => (
+              <Section title={section.title} closed={section.closed}>
+                {inputs[format()][section.key]}
+              </Section>
+            )}
+          </For>
         </div>
         <div class={styles.AppResult}>
           <div class={styles.AppTabs}>
             <button
+              onClick={() => setFormat("rss")}
               class={styles.AppTab}
               classList={{
-                [styles.AppTabActive]: true,
+                [styles.AppTabActive]: format() === "rss",
               }}
             >
               rss.xml
             </button>
-            <button class={styles.AppTab}>atom.xml</button>
-            <button class={styles.AppTab}>feed.json</button>
+            <button
+              onClick={() => setFormat("atom")}
+              class={styles.AppTab}
+              classList={{
+                [styles.AppTabActive]: format() === "atom",
+              }}
+            >
+              atom.xml
+            </button>
+            <button
+              onClick={() => setFormat("json")}
+              class={styles.AppTab}
+              classList={{
+                [styles.AppTabActive]: format() === "json",
+              }}
+            >
+              feed.json
+            </button>
           </div>
-          <output>
-            <code>
+          <output class={styles.AppOutput}>
+            <code class={styles.AppOutputCode}>
               <pre>
-                {JSON.stringify(
-                  {
-                    title: title(),
-                    description: description(),
-                    homepageUrl: homepageUrl(),
-                    feedUrl: feedUrl(),
-                  },
-                  null,
-                  2
-                )}
+                {formatMapper[format()]({
+                  title: title(),
+                  homepageUrl: homepageUrl(),
+                  description: description(),
+                  author: author(),
+                })}
               </pre>
             </code>
           </output>
@@ -107,6 +184,7 @@ const App: Component = () => {
           </a>{" "}
           if you like it. Source code on{" "}
           <a href="https://github.com/pawelgrzybek/feed-generator">GitHub</a>.
+          Have a great day 🫶
         </p>
       </footer>
     </div>
